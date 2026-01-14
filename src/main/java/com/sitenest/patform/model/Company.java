@@ -1,13 +1,11 @@
 package com.sitenest.patform.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.EnableMBeanExport;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,12 +15,18 @@ import org.springframework.context.annotation.EnableMBeanExport;
 @Table(name = "companies")
 public class Company extends GlobalRecord{
 
+    @Column(unique = true )
     private String companyId;
+    @Column(unique = true )
     private String companyName;
+    @Column(unique = true )
     private String legalName;
     //business & compilance
+    @Column(unique = true )
     private String gstNumber;
+    @Column(unique = true )
     private String panNumber;
+    @Column(unique = true )
     private String cinNumber;
     //address
     private String companyType;
@@ -37,13 +41,20 @@ public class Company extends GlobalRecord{
     private String geoLongitude;
     private boolean isKycCompleted;
     //contact info
+    @Column(unique = true )
     private String supportMail;
+    @Column(unique = true)
     private String supportPhoneNumber;
     //Finance & banking details
+    @Column(unique = true)
     private String bankAccountNumber;
     private String bankName;
     private String ifscCode;
     private String creditLimitForDistributors;
+
+    @OneToMany
+    List<Document> documentList;
+    private String status;
 
 }
 //company will be inherited by manufacturer company and distributor company

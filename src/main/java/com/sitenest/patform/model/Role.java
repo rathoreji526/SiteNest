@@ -5,14 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "company_employees")
-public class CompanyEmployee extends User{
-    @Column(unique = true)
-    private String companyEmployeeId;
-    @ManyToOne
-    private Company company;
+@Table(name = "roles")
+public class Role extends GlobalRecord{
+    private String roleId;
+    private String roleName;
+    @ManyToMany
+    private List<Operation> operations;
 }

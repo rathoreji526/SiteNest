@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -19,8 +19,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID sysId;
     private String fullName;
+    @Column(unique = true)
     private String email;
     private String password;
+    @Column(unique = true)
     private String phoneNumber;
     private String addressLine1;
     private String addressLine2;
@@ -28,5 +30,7 @@ public class User {
     private int pincode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<Role> roles;
 }
 //user model/entiry will be inherited by every class and user will be everyone admin also
